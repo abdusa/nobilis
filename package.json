@@ -1,0 +1,30 @@
+{
+  "name": "nobilis",
+  "version": "1.0.0",
+  "description": "simple task runner for fast project",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abdusa/nobilis.git"
+  },
+  "keywords": [
+    "task",
+    "runner",
+    "js",
+    "gulp",
+    "sass"
+  ],
+  "author": "abdusa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abdusa/nobilis/issues"
+  },
+  "homepage": "https://github.com/abdusa/nobilis#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0"
+  }
+}

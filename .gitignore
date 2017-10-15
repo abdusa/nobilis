@@ -63,3 +63,5 @@ package.json.lock
 
 # vscode
 .vscode
+public/*
+!public/.gitkeep

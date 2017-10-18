@@ -1,8 +1,8 @@
 import gulp from 'gulp'
 import pug from 'gulp-pug'
 import plumber from 'gulp-plumber'
-import browserSync from 'browser-sync'
 import sass from 'gulp-sass'
+const browserSync = require('browser-sync').create()
 
 
 // Pug Compile
@@ -25,6 +25,7 @@ gulp.task('sass', () => {
       outputStyle: 'expanded'
     }))
     .pipe(gulp.dest('./public/assets/css/'))
+    .pipe(browserSync.stream())
 })
 
 // browser Sync
@@ -34,16 +35,21 @@ gulp.task('browserSync', () => {
       baseDir: 'public',
       index: 'index.html'
     },
+    files: [
+      'public/index.html',
+      'public/assets/css/styles.css'
+    ],
     open: 'local',
-    notify: false
+    notify: false,
+    injectChanges: true,
   })
 })
 
 // Reloading browser if views changed
 gulp.task('reload', () => {browserSync.reload()})
 
-
 // Serve files
-gulp.task('serve', ['pug', 'browserSync'], () => {
-    gulp.watch('src/views/index.pug', ['pug', 'reload'])
+gulp.task('serve', ['pug', 'sass', 'browserSync'], () => {
+    gulp.watch('src/views/index.{jade,pug}', ['pug'])
+    gulp.watch('src/styles/styles.{scss,sass}', ['sass'])
 })

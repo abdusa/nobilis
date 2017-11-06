@@ -3,6 +3,8 @@ import pug from 'gulp-pug'
 import plumber from 'gulp-plumber'
 import sass from 'gulp-sass'
 import changed from 'gulp-changed'
+import postcss from 'gulp-postcss'
+import autoprefixer from 'autoprefixer'
 const browserSync = require('browser-sync').create()
 
 
@@ -25,6 +27,11 @@ gulp.task('sass', () => {
       includePaths: './src/styles/',
       outputStyle: 'expanded'
     }))
+    .pipe(postcss([autoprefixer({
+      browsers: [
+        "last 3 versions",
+      ]
+    })]))
     .pipe(gulp.dest('./public/assets/css/'))
     .pipe(browserSync.stream())
 })

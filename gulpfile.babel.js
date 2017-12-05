@@ -24,8 +24,9 @@ gulp.task('sass', () => {
     .pipe(plumber())
     .pipe(sass({
       precision: 4,
-      includePaths: './src/styles/',
-      outputStyle: 'expanded'
+      includePaths: ['./src/styles/', './src/modules/'],
+      outputStyle: 'expanded',
+      indentWidth: 4,
     }))
     .pipe(postcss([autoprefixer({
       browsers: [
@@ -46,7 +47,8 @@ gulp.task('browserSync', () => {
     files: [
       'public/index.html',
       'public/assets/css/styles.css',
-      'public/assets/js/main.js'
+      'public/assets/js/main.js',
+      'public/assets/img/**/*.{jpg, jpeg, png, gif, webp}'
     ],
     open: 'local',
     notify: false,
@@ -66,7 +68,7 @@ gulp.task('reload', () => {browserSync.reload()})
 
 // Serve files
 gulp.task('serve', ['pug', 'sass', 'browserSync'], () => {
-  gulp.watch('src/views/index.{jade,pug}', ['pug'])
-  gulp.watch('src/styles/styles.{scss,sass}', ['sass'])
-  gulp.watch('src/scripts/main.js', ['js'])
+  gulp.watch('./src/views/**/*.{jade,pug}', ['pug'])
+  gulp.watch(['styles/**/*.{scss,sass}', 'modules/**/*.{scss,sass}'], {cwd: 'src'}, ['sass'])
+  gulp.watch('./src/scripts/main.js', ['js'])
 })

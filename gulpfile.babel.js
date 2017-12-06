@@ -5,6 +5,7 @@ import sass from 'gulp-sass'
 import changed from 'gulp-changed'
 import postcss from 'gulp-postcss'
 import autoprefixer from 'autoprefixer'
+import eslint from 'gulp-eslint'
 const browserSync = require('browser-sync').create()
 
 
@@ -59,6 +60,10 @@ gulp.task('browserSync', () => {
 // Handle vanilla javascript
 gulp.task('js', () => {
   return gulp.src('src/scripts/main.js')
+    .pipe(plumber())
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
     .pipe(changed('public/assets/js/main.js'))
     .pipe(gulp.dest('public/assets/js/'))
 })
